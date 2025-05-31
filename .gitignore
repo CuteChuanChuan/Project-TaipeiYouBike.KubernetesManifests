@@ -1,0 +1,11 @@
+*secret*
+*configmap*
+
+!*secretExample*
+!*configmapExample*
+
+# IntelliJ specific
+.idea/
+*.iml
+*.iws
+out/

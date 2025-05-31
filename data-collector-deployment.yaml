@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: data-collector
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: data-collector
+  template:
+    metadata:
+      labels:
+        app: data-collector
+    spec:
+      containers:
+        - name: collector
+          image: cutechuanchuan/bike-data-collector:0.0.2
+          imagePullPolicy: Always
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "256Mi"
+              cpu: "200m"
+          env:
+            - name: MONGODB_URI
+              valueFrom:
+                secretKeyRef:
+                  key: mongodb-uri
+                  name: mongodb-secret
